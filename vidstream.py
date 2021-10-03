@@ -141,6 +141,7 @@ async def play(client, m: Message):
                   ytid = result['id']
                   url = f"https://www.youtube.com/watch?v={ytid}"
             except Exception as ey:
+               print(ey)
                await m.reply("`Found Nothing :( Try searching something Else.`")
             try:
                meta = ydl.extract_info(url, download=False)
@@ -193,6 +194,7 @@ async def play(client, m: Message):
                   ytid = result['id']
                   url = f"https://www.youtube.com/watch?v={ytid}"
             except Exception as ey:
+               print(ey)
                await m.reply("`Found Nothing :( Try searching something Else.`")
             try:
                meta = ydl.extract_info(url, download=False)
