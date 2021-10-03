@@ -53,7 +53,7 @@ async def stream(client, m: Message):
                ytstreamlink = f['url']
             livelink = ytstreamlink
          except Exception as e:
-            huehue.edit(f"**YTDL ERROR** \n{e}")
+            await huehue.edit(f"**YTDL ERROR** \n{e}")
       else:
          livelink = link
 
@@ -144,7 +144,7 @@ async def play(client, m: Message):
                   ytstreamlink = f['url']
                ytlink = ytstreamlink
             except Exception as eu:
-               hmmop.edit(f"**YTDL ERROR** \n{eu}")
+               await hmmop.edit(f"**YTDL ERROR** \n{eu}")
             # Playing
             if chat_id in GROUP_CALL:
                try:
@@ -195,7 +195,7 @@ async def play(client, m: Message):
                   ytstreamlink = f['url']
                ytlink = ytstreamlink
             except Exception as eu:
-               hmmop.edit(f"**YTDL ERROR** \n{eu}")
+               await hmmop.edit(f"**YTDL ERROR** \n{eu}")
             # Playing
             if chat_id in GROUP_CALL:
                try:
