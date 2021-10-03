@@ -126,7 +126,7 @@ async def play(client, m: Message):
             except Exception as ep:
                await huehue.edit(f"{ep}")
       else:
-         if len(m.command) < 2
+         if len(m.command) < 2:
             await replied.reply("`Either Reply to a VIDEO or Give me Query/YT Link to Play`")
          else:
             try:
@@ -177,7 +177,7 @@ async def play(client, m: Message):
                   await hmmop.edit(f"{ep}")
    
    else:
-         if len(m.command) < 2
+         if len(m.command) < 2:
             await replied.reply("`Either Reply to a VIDEO or Give me Query/YT Link to Play`")
          else:
             try:
