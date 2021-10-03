@@ -91,11 +91,11 @@ async def stream(client, m: Message):
 @bot.on_message(self_or_contact_filter & filters.command("vplay", prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
    replied = m.reply_to_message
+   chat_id = m.chat.id
    if replied:
       if replied.document or replied.video:
          huehue = await replied.reply("`Downloading 📩`")
          location = await replied.download()
-         chat_id = m.chat.id
          if chat_id in GROUP_CALL:
             try:
                await call_py.change_stream(
