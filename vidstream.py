@@ -150,6 +150,7 @@ async def play(client, m: Message):
                ytlink = ytstreamlink
             except Exception as eu:
                await hmmop.edit(f"**YTDL ERROR** \n{eu}")
+               print(eu)
             # Playing
             if chat_id in GROUP_CALL:
                try:
