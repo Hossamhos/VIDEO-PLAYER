@@ -1,4 +1,5 @@
 import os
+import signal
 import re
 import asyncio
 from pyrogram import Client, filters, idle
@@ -35,6 +36,9 @@ async def get_youtube_stream(ytlink):
         )
         stdout, stderr = await proc.communicate()
         return stdout.decode().split('\n')[0]
+
+async def restart():
+    os.kill(os.getpid(), signal.SIGUSR1)
 
 
 # Client and PyTgCalls
@@ -264,6 +268,14 @@ async def ping(client, m: Message):
    m_reply = await m.reply_text("`...`")
    delta_ping = time() - start
    await m_reply.edit(f"`Pong 🏓!` \n`{delta_ping * 1000:.3f} ms`")
+
+@bot.on_message(self_or_contact_filter & filters.command("restart", prefixes=f"{HNDLR}"))
+async def restart(client, m: Message):
+   umm = await m.reply_text("`Restarting ⚙️...`")
+   try:
+      asyncio.get_event_loop().create_task(restart())
+   except Exception as e:
+      await umm.edit(f"**An Error Occurred :-** \n`{e}`")
 
 
 bot.start()
