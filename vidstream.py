@@ -22,6 +22,22 @@ if os.path.exists(".env"):
 opts = {"format": "best[height=?720]/best", "noplaylist": True}
 ydl = YoutubeDL(opts)
 
+def get_youtube_stream(ytlink):
+    async def run_async():
+        proc = await asyncio.create_subprocess_exec(
+            'youtube-dl',
+            '-g',
+            '-f',
+            # CHANGE THIS BASED ON WHAT YOU WANT
+            'best[height<=?720][width<=?1280]',
+            f'{ytlink}',
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await proc.communicate()
+        return stdout.decode().split('\n')[0]
+    return asyncio.get_event_loop().run_until_complete(run_async())
+
 # Client and PyTgCalls
 API_ID = int(os.getenv("API_ID", "6"))
 API_HASH = os.getenv("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
@@ -144,15 +160,7 @@ async def play(client, m: Message):
             except Exception as ey:
                print(ey)
                await m.reply("`Found Nothing :( Try searching something Else.`")
-            try:
-               meta = ydl.extract_info(url, download=False)
-               formats = meta.get('formats', [meta])
-               for f in formats:
-                  ytstreamlink = f['url']
-               ytlink = ytstreamlink
-            except Exception as eu:
-               await hmmop.edit(f"**YTDL ERROR** \n{eu}")
-               print(eu)
+            ytlink = await get_youtube_stream(url)
             # Playing
             if chat_id in GROUP_CALL:
                try:
@@ -198,14 +206,7 @@ async def play(client, m: Message):
             except Exception as ey:
                print(ey)
                await m.reply("`Found Nothing :( Try searching something Else.`")
-            try:
-               meta = ydl.extract_info(url, download=False)
-               formats = meta.get('formats', [meta])
-               for f in formats:
-                  ytstreamlink = f['url']
-               ytlink = ytstreamlink
-            except Exception as eu:
-               await hmmop.edit(f"**YTDL ERROR** \n{eu}")
+            ytlink = await get_youtube_stream(url)
             # Playing
             if chat_id in GROUP_CALL:
                try:
