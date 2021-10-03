@@ -76,7 +76,7 @@ async def stream(client, m: Message):
             await huehue.delete()
             await m.reply(f"Started [Streaming]({livelink}) in {chat_id}!", disable_web_page_preview=True)
          except Exception as ep:
-            await huehue.edit(f"{ep}")
+            await m.reply(f"{ep}")
       else:
          try:
             await call_py.join_group_call(
@@ -91,7 +91,7 @@ async def stream(client, m: Message):
             await huehue.delete()
             await m.reply(f"Started [Streaming]({livelink}) in {chat_id}!", disable_web_page_preview=True)
          except Exception as ep:
-            await huehue.edit(f"{ep}")
+            m.reply(f"{ep}")
 
 @bot.on_message(self_or_contact_filter & filters.command("vplay", prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
@@ -114,7 +114,7 @@ async def play(client, m: Message):
                await huehue.delete()
                await replied.reply(f"Started Playing in {chat_id}!", disable_web_page_preview=True)
             except Exception as ep:
-               await huehue.edit(f"{ep}")
+               await m.reply(f"{ep}")
          else:
             try:
                await call_py.join_group_call(
@@ -129,7 +129,7 @@ async def play(client, m: Message):
                await huehue.delete()
                await replied.reply(f"Started Playing in {chat_id}!", disable_web_page_preview=True)
             except Exception as ep:
-               await huehue.edit(f"{ep}")
+               await m.reply(f"{ep}")
       else:
          if len(m.command) < 2:
             await replied.reply("`Either Reply to a VIDEO or Give me Query/YT Link to Play`")
@@ -167,7 +167,7 @@ async def play(client, m: Message):
                   await hmmop.delete()
                   await m.reply(f"Started [Streaming]({ytlink}) in {chat_id}!", disable_web_page_preview=True)
                except Exception as ep:
-                  await hmmop.edit(f"{ep}")
+                  await m.reply(f"{ep}")
             else:
                try:
                   await call_py.join_group_call(
@@ -182,7 +182,7 @@ async def play(client, m: Message):
                   await hmmop.delete()
                   await m.reply(f"Started [Streaming]({livelink}) in {chat_id}!", disable_web_page_preview=True)
                except Exception as ep:
-                  await hmmop.edit(f"{ep}")
+                  await m.reply(f"{ep}")
    
    else:
          if len(m.command) < 2:
@@ -218,9 +218,9 @@ async def play(client, m: Message):
                      )
                   )
                   await hmmop.delete()
-                  await m.reply(f"Started [Streaming]({ytlink}) in {chat_id}!", disable_web_page_preview=True)
+                  await m.reply(f"Started [Streaming]({ytlink}) in `{chat_id}`", disable_web_page_preview=True)
                except Exception as ep:
-                  await hmmop.edit(f"{ep}")
+                  await m.reply(f"{ep}")
             else:
                try:
                   await call_py.join_group_call(
@@ -233,9 +233,9 @@ async def play(client, m: Message):
                   )
                   GROUP_CALL.append(chat_id)
                   await hmmop.delete()
-                  await m.reply(f"Started [Streaming]({livelink}) in {chat_id}!", disable_web_page_preview=True)
+                  await m.reply(f"Started [Streaming]({ytlink}) in `{chat_id}`", disable_web_page_preview=True)
                except Exception as ep:
-                  await hmmop.edit(f"{ep}")
+                  await m.reply(f"{ep}")
 
 @bot.on_message(self_or_contact_filter & filters.command("vstop", prefixes=f"{HNDLR}"))
 async def stop(client, m: Message):
