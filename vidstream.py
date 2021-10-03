@@ -12,6 +12,11 @@ from pytgcalls.types.input_stream.quality import HighQualityVideo, MediumQuality
 from youtube_dl import YoutubeDL
 from youtubesearchpython import VideosSearch
 from time import time
+from dotenv import load_dotenv
+
+# VPS 
+if os.path.exists(".env"):
+    load_dotenv(".env")
 
 # YTDL
 opts = {"format": "best[height=?720]/best", "noplaylist": True}
