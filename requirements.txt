@@ -4,3 +4,4 @@ py-tgcalls==0.8.1b25
 asyncio
 youtube-search-python
 youtube-dl
+python-dotenv
