@@ -35,7 +35,7 @@ async def get_youtube_stream(ytlink):
         )
         stdout, stderr = await proc.communicate()
         return stdout.decode().split('\n')[0]
-    return await asyncio.get_event_loop().run_until_complete(await get_youtube_stream(ytlink))
+
 
 # Client and PyTgCalls
 API_ID = int(os.getenv("API_ID", "6"))
