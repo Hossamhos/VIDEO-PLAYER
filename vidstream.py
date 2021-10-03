@@ -80,7 +80,9 @@ async def stream(client, m: Message):
       # Playing
       if chat_id in GROUP_CALL:
          try:
-            await call_py.change_stream(
+            await call_py.leave_group_call(chat_id)
+            await asyncio.sleep(2)
+            await call_py.join_group_call(
                chat_id,
                AudioVideoPiped(
                   livelink,
@@ -118,7 +120,9 @@ async def play(client, m: Message):
          location = await replied.download()
          if chat_id in GROUP_CALL:
             try:
-               await call_py.change_stream(
+               await call_py.leave_group_call(chat_id)
+               await asyncio.sleep(2)
+               await call_py.join_group_call(
                   chat_id,
                   AudioVideoPiped(
                      location,
@@ -163,7 +167,9 @@ async def play(client, m: Message):
             # Playing
             if chat_id in GROUP_CALL:
                try:
-                  await call_py.change_stream(
+                  await call_py.leave_group_call(chat_id)
+                  await asyncio.sleep(2)
+                  await call_py.join_group_call(
                      chat_id,
                      AudioVideoPiped(
                         ytlink,
@@ -209,7 +215,9 @@ async def play(client, m: Message):
             # Playing
             if chat_id in GROUP_CALL:
                try:
-                  await call_py.change_stream(
+                  await call_py.leave_group_call(chat_id)
+                  await asyncio.sleep(2)
+                  await call_py.join_group_call(
                      chat_id,
                      AudioVideoPiped(
                         ytlink,
