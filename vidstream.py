@@ -135,6 +135,7 @@ async def play(client, m: Message):
             await replied.reply("`Either Reply to a VIDEO or Give me Query/YT Link to Play`")
          else:
             try:
+               query = m.text.split(None, 1)[1]
                hmmop = await m.reply("`Searching 🔎`")
                search = VideosSearch(query, limit=1)
                for result in search.result()["result"]:
@@ -188,6 +189,7 @@ async def play(client, m: Message):
             await replied.reply("`Either Reply to a VIDEO or Give me Query/YT Link to Play`")
          else:
             try:
+               query = m.text.split(None, 1)[1]
                hmmop = await m.reply("`Searching 🔎`")
                search = VideosSearch(query, limit=1)
                for result in search.result()["result"]:
