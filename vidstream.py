@@ -26,7 +26,7 @@ ydl = YoutubeDL(opts)
 API_ID = int(os.getenv("API_ID", "6"))
 API_HASH = os.getenv("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
 SESSION = os.getenv("SESSION")
-CHAT = int(os.getenv("CHAT"))
+CHAT = int(os.getenv("CHAT", "6"))
 HNDLR = os.getenv("HNDLR", "!")
 
 bot = Client(SESSION, API_ID, API_HASH)
