@@ -22,8 +22,8 @@ if os.path.exists(".env"):
 opts = {"format": "best[height=?720]/best", "noplaylist": True}
 ydl = YoutubeDL(opts)
 
-def get_youtube_stream(ytlink):
-    async def run_async():
+async def get_youtube_stream(ytlink):
+    async def run_async(ytlink):
         proc = await asyncio.create_subprocess_exec(
             'youtube-dl',
             '-g',
