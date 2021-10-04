@@ -296,6 +296,10 @@ async def kill(client, m: Message):
       await call_py.leave_group_call(x)
       GROUP_CALL.remove(x)
    await m.reply("`Cleaned all the Temporary Files 🗑️ and Stopped All Processes and Left all Voice Chats`")
+
+@bot.on_message(self_or_contact_filter & filters.command("help", prefixes=f"{HNDLR}"))
+async def help(client, m: Message):
+   await m.reply(f"**HELP MENU** \n\n`{HNDLR}ping` - `To Chk if Bot is Alive` \n`{HNDLR}vplay query` - `Reply to a File/ Or give a Query to play from YT` \n`{HNDLR}vstream link` - `For .m3u8 / live links` \n`{HNDLR}vstop` - `To Stop Playing` \n`{HNDLR}restart` - `Restart the Bot`")
    
 @bot.on_message(self_or_contact_filter & filters.command("restart", prefixes=f"{HNDLR}"))
 async def restart(client, m: Message):
