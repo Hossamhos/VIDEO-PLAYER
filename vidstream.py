@@ -104,7 +104,7 @@ async def stream(client, m: Message):
                AudioVideoPiped(
                   livelink,
                   HighQualityAudio(),
-                  MediumQualityVideo()
+                  HighQualityVideo()
                )
             )
             await huehue.delete()
@@ -118,7 +118,7 @@ async def stream(client, m: Message):
                AudioVideoPiped(
                   livelink,
                   HighQualityAudio(),
-                  MediumQualityVideo()
+                  HighQualityVideo()
                )
             )
             GROUP_CALL.append(chat_id)
@@ -135,6 +135,19 @@ async def play(client, m: Message):
       if replied.document or replied.video:
          huehue = await replied.reply("`Downloading 📩`")
          location = await replied.download()
+         if len(m.command) < 2:
+            q = HighQualityVideo()
+         else:
+            p = m.text.split(None, 1)[1]
+            if p=="720":
+               q = HighQualityVideo()
+            if p=="480":
+               q = MediumQualityVideo()
+            if p=="360":
+               q = LowQualityVideo()
+            else:
+               q = HighQualityVideo()
+               await huehue.edit("`Only 720, 480, 360 Allowed` \n`Now Streaming in 720p`")
          if chat_id in GROUP_CALL:
             try:
                await call_py.leave_group_call(chat_id)
@@ -144,7 +157,7 @@ async def play(client, m: Message):
                   AudioVideoPiped(
                      location,
                      HighQualityAudio(),
-                     MediumQualityVideo()
+                     q
                   )
                )
                await huehue.delete()
@@ -158,7 +171,7 @@ async def play(client, m: Message):
                   AudioVideoPiped(
                      location,
                      HighQualityAudio(),
-                     MediumQualityVideo()
+                     q
                   )
                )
                GROUP_CALL.append(chat_id)
@@ -191,7 +204,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        MediumQualityVideo()
+                        HighQualityVideo()
                      )
                   )
                   await hmmop.delete()
@@ -205,7 +218,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        MediumQualityVideo()
+                        HighQualityVideo()
                      )
                   )
                   GROUP_CALL.append(chat_id)
@@ -239,7 +252,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        MediumQualityVideo()
+                        HighQualityVideo()
                      )
                   )
                   await hmmop.delete()
@@ -253,7 +266,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        MediumQualityVideo()
+                        HighQualityVideo()
                      )
                   )
                   GROUP_CALL.append(chat_id)
