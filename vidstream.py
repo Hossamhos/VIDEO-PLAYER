@@ -20,9 +20,6 @@ if os.path.exists(".env"):
     load_dotenv(".env")
 
 # YTDL
-opts = {"format": "best[height=?720]/best", "noplaylist": True}
-ydl = YoutubeDL(opts)
-
 async def get_youtube_stream(ytlink):
         proc = await asyncio.create_subprocess_exec(
             'youtube-dl',
@@ -38,7 +35,7 @@ async def get_youtube_stream(ytlink):
         return stdout.decode().split('\n')[0]
 
 async def restart():
-    os.kill(os.getpid(), signal.SIGUSR1)
+        os.kill(os.getpid(), signal.SIGUSR1)
 
 
 # Client and PyTgCalls
@@ -71,11 +68,7 @@ async def stream(client, m: Message):
       match = re.match(regex,link)
       if match:
          try:
-            meta = ydl.extract_info(link, download=False)
-            formats = meta.get('formats', [meta])
-            for f in formats:
-               ytstreamlink = f['url']
-            livelink = ytstreamlink
+            livelink = await get_youtube_stream(link)
          except Exception as e:
             await huehue.edit(f"**YTDL ERROR** \n{e}")
       else:
@@ -273,7 +266,7 @@ async def ping(client, m: Message):
 async def restart(client, m: Message):
    umm = await m.reply_text("`Restarting ⚙️...`")
    try:
-      asyncio.get_event_loop().create_task(restart())
+      asyncio.get_event_loop().create_task(restart(client, m))
    except Exception as e:
       await umm.edit(f"**An Error Occurred :-** \n`{e}`")
 
