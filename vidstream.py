@@ -79,9 +79,27 @@ async def stream(client, m: Message):
    if len(m.command) < 2:
       await m.reply("`Give A Link/LiveLink/.m3u8 URL/YTLink to Stream from 🎶`")
    else:
-      link = m.text.split(None, 1)[1]
+      if len(m.command)==2:
+         link = m.text.split(None, 1)[1]
+         q = HighQualityVideo()
+         huehue = await m.reply("`Trying to Stream 💭`")
+      elif len(m.command)==3:
+         op = m.text.split(None, 1)[1]
+         link = op.split(None, 1)[0]
+         quality = op.split(None, 1)[1]
+         if quality=="720":
+            q = HighQualityVideo()
+         elif quality=="480":
+            q = MediumQualityVideo()
+         elif quality=="360":
+            q = LowQualityVideo()
+         else:
+            q = HighQualityVideo()
+            await m.reply("`Use 360/480/720`")
+         huehue = await m.reply("`Trying to Stream 💭`")
+      else:
+         await m.reply("`!vstream {link} {720/480/360}`")
       chat_id = m.chat.id
-      huehue = await m.reply("`Trying to Stream 💭`")
 
       # Filtering out YouTube URL's
       regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+"
@@ -104,7 +122,7 @@ async def stream(client, m: Message):
                AudioVideoPiped(
                   livelink,
                   HighQualityAudio(),
-                  HighQualityVideo()
+                  q
                )
             )
             await huehue.delete()
@@ -118,7 +136,7 @@ async def stream(client, m: Message):
                AudioVideoPiped(
                   livelink,
                   HighQualityAudio(),
-                  HighQualityVideo()
+                  q
                )
             )
             GROUP_CALL.append(chat_id)
@@ -138,12 +156,12 @@ async def play(client, m: Message):
          if len(m.command) < 2:
             q = HighQualityVideo()
          else:
-            p = m.text.split(None, 1)[1]
-            if p=="720":
+            pq = m.text.split(None, 1)[1]
+            if pq=="720":
                q = HighQualityVideo()
-            if p=="480":
+            elif pq=="480":
                q = MediumQualityVideo()
-            if p=="360":
+            elif pq=="360":
                q = LowQualityVideo()
             else:
                q = HighQualityVideo()
@@ -204,7 +222,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        HighQualityVideo()
+                        MediumQualityVideo()
                      )
                   )
                   await hmmop.delete()
@@ -218,7 +236,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        HighQualityVideo()
+                        MediumQualityVideo()
                      )
                   )
                   GROUP_CALL.append(chat_id)
@@ -252,7 +270,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        HighQualityVideo()
+                        MediumQualityVideo()
                      )
                   )
                   await hmmop.delete()
@@ -266,7 +284,7 @@ async def play(client, m: Message):
                      AudioVideoPiped(
                         ytlink,
                         HighQualityAudio(),
-                        HighQualityVideo()
+                        MediumQualityVideo()
                      )
                   )
                   GROUP_CALL.append(chat_id)
