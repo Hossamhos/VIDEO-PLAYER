@@ -292,7 +292,10 @@ async def kill(client, m: Message):
       os.system("rm -rf downloads")
    except Exception as e:
       print(e)
-   await m.reply("`Cleaned all the Temporary Files 🗑️ and Stopped All Processes`")
+   for x in GROUP_CALL:
+      await call_py.leave_group_call(x)
+      GROUP_CALL.remove(x)
+   await m.reply("`Cleaned all the Temporary Files 🗑️ and Stopped All Processes and Left all Voice Chats`")
    
 @bot.on_message(self_or_contact_filter & filters.command("restart", prefixes=f"{HNDLR}"))
 async def restart(client, m: Message):
