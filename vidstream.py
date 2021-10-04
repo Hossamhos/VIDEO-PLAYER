@@ -34,8 +34,6 @@ async def get_youtube_stream(ytlink):
         stdout, stderr = await proc.communicate()
         return stdout.decode().split('\n')[0]
 
-async def restart():
-        os.kill(os.getpid(), signal.SIGUSR1)
 
 
 # Client and PyTgCalls
@@ -266,7 +264,7 @@ async def ping(client, m: Message):
 async def restart(client, m: Message):
    umm = await m.reply_text("`Restarting ⚙️...`")
    try:
-      asyncio.get_event_loop().create_task(restart(client, m))
+      asyncio.get_event_loop().create_task(os.kill(os.getpid(), signal.SIGUSR1))
    except Exception as e:
       await umm.edit(f"**An Error Occurred :-** \n`{e}`")
 
