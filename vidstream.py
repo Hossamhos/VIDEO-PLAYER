@@ -299,7 +299,7 @@ async def kill(client, m: Message):
 
 @bot.on_message(self_or_contact_filter & filters.command("help", prefixes=f"{HNDLR}"))
 async def help(client, m: Message):
-   await m.reply(f"**🛠 HELP MENU** \n\n`{HNDLR}ping` - To Chk if Bot is Alive \n`{HNDLR}vplay query` - Reply to a File/ Or give a Query to play from YT \n`{HNDLR}vstream link` - For .m3u8 / live links \n`{HNDLR}vstop` - To Stop Playing in Current Chat \n`{HNDLR}restart` - Restart the Bot")
+   await m.reply(f"**🛠 HELP MENU** \n\n`{HNDLR}ping` \n`{HNDLR}vplay query` \n`{HNDLR}vstream link` \n`{HNDLR}vstop` \n`{HNDLR}restart`")
    
 @bot.on_message(self_or_contact_filter & filters.command("restart", prefixes=f"{HNDLR}"))
 async def restart(client, m: Message):
