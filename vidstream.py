@@ -284,6 +284,15 @@ async def ping(client, m: Message):
    uptime_sec = (current_time - START_TIME).total_seconds()
    uptime = await _human_time_duration(int(uptime_sec))
    await m_reply.edit(f"`Pong 🏓!` `{delta_ping * 1000:.3f} ms` \n**Uptime 🤖** - `{uptime}`")
+
+@bot.on_message(self_or_contact_filter & filters.command("killall", prefixes=f"{HNDLR}"))
+async def kill(client, m: Message):   
+   os.system("pkill ffmpeg")
+   try:
+      os.system("rm -rf downloads")
+   except Exception as e:
+      print(e)
+   await m.reply("`Cleaned all the Temporary Files 🗑️ and Stopped All Processes`")
    
 @bot.on_message(self_or_contact_filter & filters.command("restart", prefixes=f"{HNDLR}"))
 async def restart(client, m: Message):
@@ -292,6 +301,7 @@ async def restart(client, m: Message):
       asyncio.get_event_loop().create_task(os.kill(os.getpid(), signal.SIGUSR1))
    except Exception as e:
       await umm.edit(f"**An Error Occurred :-** \n`{e}`")
+
 
 
 bot.start()
