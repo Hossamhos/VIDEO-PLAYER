@@ -10,7 +10,6 @@
     "env": {
         "SESSION": {
             "description": "Pyrogram String Session",
-            "value": "",
             "required": true
         },
         "API_ID": {
