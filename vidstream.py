@@ -448,6 +448,18 @@ async def kill(client, m: Message):
 async def help(client, m: Message):
    await m.reply(f"**🛠 HELP MENU** \n\n`{HNDLR}ping` \n`{HNDLR}vplay query` \n`{HNDLR}vstream link` \n`{HNDLR}vstop` \n`{HNDLR}restart`")
 
+@bot.on_message(self_or_contact_filter & filters.command("pause", prefixes=f"{HNDLR}"))
+async def pause(client, m: Message):
+   chat_id = m.chat.id
+   await call_py.pause_stream(chat_id)
+   await m.reply("`Paused Streaming ⏸️`")
+
+@bot.on_message(self_or_contact_filter & filters.command("resume", prefixes=f"{HNDLR}"))
+async def resume(client, m: Message):
+   chat_id = m.chat.id
+   await call_py.resume_stream(chat_id)
+   await m.reply("`Resumed Streaming ▶`") 
+
 @bot.on_message(self_or_contact_filter & filters.command("update", prefixes=f"{HNDLR}"))
 async def update(client, m: Message):
    hmm = await bash("git pull -f")
