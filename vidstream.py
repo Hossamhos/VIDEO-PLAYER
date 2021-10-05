@@ -443,7 +443,7 @@ async def help(client, m: Message):
    
 @bot.on_message(self_or_contact_filter & filters.command("restart", prefixes=f"{HNDLR}"))
 async def restart(client, m: Message):
-   umm = await m.reply_text("`Restarting ⚙️...`")
+   umm = await m.reply_text("`Restarting ⚙️..`")
    try:
       asyncio.get_event_loop().create_task(os.kill(os.getpid(), signal.SIGUSR1))
    except Exception as e:
