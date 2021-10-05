@@ -111,6 +111,7 @@ async def stream(client, m: Message):
             await huehue.edit(f"**YTDL ERROR** \n{e}")
       else:
          livelink = link
+      print(livelink)
 
       # Playing
       if chat_id in GROUP_CALL:
@@ -143,7 +144,7 @@ async def stream(client, m: Message):
             await huehue.delete()
             await m.reply(f"Started [Streaming]({livelink}) in {chat_id}!", disable_web_page_preview=True)
          except Exception as ep:
-            m.reply(f"{ep}")
+            await m.reply(f"{ep}")
 
 @bot.on_message(self_or_contact_filter & filters.command("vplay", prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
@@ -212,6 +213,7 @@ async def play(client, m: Message):
                print(ey)
                await m.reply("`Found Nothing :( Try searching something Else.`")
             ytlink = await get_youtube_stream(url)
+            print(ytlink)
             # Playing
             if chat_id in GROUP_CALL:
                try:
@@ -260,6 +262,7 @@ async def play(client, m: Message):
                print(ey)
                await m.reply("`Found Nothing :( Try searching something Else.`")
             ytlink = await get_youtube_stream(url)
+            print(ytlink)
             # Playing
             if chat_id in GROUP_CALL:
                try:
